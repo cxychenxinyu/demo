@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+		PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+	<!-- 引入配置文件 -->
+	<properties resource="config/db.properties"/>
+
+	<!-- 数据库的JDBC驱动的jar包地址 -->
+	<classPathEntry location="${cims3.jdbc.driverLocation}" />
+
+	<!-- 一个数据库一个context，defaultModelType-flat该模型为每一张表只生成一个实体类。这个实体类包含表中的所有字段 -->
+	<!--defaultModelType:指定生成对象的样式，flat：所有内容（主键，blob）等全部生成在一个对象中；hierarchical：主键生成一个XXKey对象(key class)，Blob等单独生成一个对象，其他简单属性在一个对象中(record class)，conditional：类似hierarchical；-->
+	<!--MyBatis3：默认的值，生成基于MyBatis3.x以上版本的内容，包括XXXBySample；MyBatis3Simple：类似MyBatis3，只是不生成XXXBySample；-->
+	<context id="MYSQL" defaultModelType="flat" targetRuntime="MyBatis3">
+		<!-- 自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖-->
+		<property name="autoDelimitKeywords" value="false"/>
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8"/>
+		<!-- 格式化java代码 -->
+		<property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+		<!-- 格式化XML代码 -->
+		<property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+		<!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/>
+
+		<!--tk.mybatis插件-->
+		<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+		<!--
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+	      <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+	      <property name="caseSensitive" value="true"/>
+	    </plugin>
+	    -->
+
+		<commentGenerator>
+			<!-- 这个元素用来指定生成的注释中是否包含生成的日期，是否生成注释代时间戳-->
+			<property name="suppressDate" value="false" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 ，是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<!-- jdbc连接 -->
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="${cims3.jdbc.driver}" connectionURL="${cims3.jdbc.url}" userId="${cims3.jdbc.username}" password="${cims3.jdbc.password}">
+		</jdbcConnection>
+
+		<!-- 类型转换 -->
+		<javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl">
+			<!-- false：JDBC DECIMAL、NUMERIC类型解析为Integer，默认方式 -->
+			<!-- true： JDBC DECIMAL、NUMERIC类型解析为java.math.BigDecimal -->
+			<!--
+				true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
+				false：默认,
+					scale>0;length>18：使用BigDecimal;
+					scale=0;length[10,18]：使用Long；
+					scale=0;length[5,9]：使用Integer；
+					scale=0;length<5：使用Short；
+			 -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.bhz.cims.iot.entity" targetProject="./src/main/java">
+			<!-- enableSubPackages:是否让schemaName作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+			<property name="trimStrings" value="true" />
+			<!-- 是否对model添加 构造函数 -->
+			<property name="constructorBased" value="true"/>
+		</javaModelGenerator>
+
+		<!-- 生成mapxml文件 -->
+		<!-- targetProject:mapper映射文件生成的位置 -->
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+			<!-- enableSubPackages:是否让schemaName作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.bhz.cims.iot.dao.mapper" targetProject="./src/main/java">
+			<!-- enableSubPackages:是否让schemaName作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<!-- schema即为数据库名 tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 enable*ByExample是否生成 example类   -->
+		<table schema="cims3" tableName="ccti_base_dept" enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="false" />
+			<columnOverride column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+			<!-- 忽略列，不生成bean 字段 -->
+			<!-- <ignoreColumn column="xxxxxx" /> -->
+		</table>
+
+	</context>
+</generatorConfiguration>

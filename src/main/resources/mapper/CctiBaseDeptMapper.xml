@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bhz.cims.iot.dao.mapper.CctiBaseDeptMapper">
+  <resultMap id="BaseResultMap" type="com.bhz.cims.iot.entity.CctiBaseDept">
+    <constructor>
+      <idArg column="BOS_UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PARENT_UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DEPT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DEPT_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SHORT_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DISPLAY_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ENABLE_FLAG" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DEPT_LEVEL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SERIAL_ORDER" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="DEPT_REMARK" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="UPDATE_UUID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATE_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    BOS_UUID, PARENT_UUID, DEPT_NAME, DEPT_CODE, SHORT_NAME, DISPLAY_NAME, ENABLE_FLAG, 
+    DEPT_LEVEL, SERIAL_ORDER, DEPT_REMARK, CREATE_UUID, CREATE_NAME, CREATE_TIME, UPDATE_UUID, 
+    UPDATE_NAME, UPDATE_TIME
+  </sql>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ccti_base_dept
+  </select>
+  <!--<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ccti_base_dept
+    where BOS_UUID = #{bosUuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ccti_base_dept
+    where BOS_UUID = #{bosUuid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bhz.cims.iot.entity.CctiBaseDept">
+    insert into ccti_base_dept (BOS_UUID, PARENT_UUID, DEPT_NAME, 
+      DEPT_CODE, SHORT_NAME, DISPLAY_NAME, 
+      ENABLE_FLAG, DEPT_LEVEL, SERIAL_ORDER, 
+      DEPT_REMARK, CREATE_UUID, CREATE_NAME, 
+      CREATE_TIME, UPDATE_UUID, UPDATE_NAME, 
+      UPDATE_TIME)
+    values (#{bosUuid,jdbcType=VARCHAR}, #{parentUuid,jdbcType=VARCHAR}, #{deptName,jdbcType=VARCHAR}, 
+      #{deptCode,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, 
+      #{enableFlag,jdbcType=INTEGER}, #{deptLevel,jdbcType=VARCHAR}, #{serialOrder,jdbcType=INTEGER}, 
+      #{deptRemark,jdbcType=VARCHAR}, #{createUuid,jdbcType=VARCHAR}, #{createName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUuid,jdbcType=VARCHAR}, #{updateName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bhz.cims.iot.entity.CctiBaseDept">
+    insert into ccti_base_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bosUuid != null">
+        BOS_UUID,
+      </if>
+      <if test="parentUuid != null">
+        PARENT_UUID,
+      </if>
+      <if test="deptName != null">
+        DEPT_NAME,
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME,
+      </if>
+      <if test="enableFlag != null">
+        ENABLE_FLAG,
+      </if>
+      <if test="deptLevel != null">
+        DEPT_LEVEL,
+      </if>
+      <if test="serialOrder != null">
+        SERIAL_ORDER,
+      </if>
+      <if test="deptRemark != null">
+        DEPT_REMARK,
+      </if>
+      <if test="createUuid != null">
+        CREATE_UUID,
+      </if>
+      <if test="createName != null">
+        CREATE_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateUuid != null">
+        UPDATE_UUID,
+      </if>
+      <if test="updateName != null">
+        UPDATE_NAME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bosUuid != null">
+        #{bosUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentUuid != null">
+        #{parentUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null">
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null">
+        #{enableFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deptLevel != null">
+        #{deptLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="serialOrder != null">
+        #{serialOrder,jdbcType=INTEGER},
+      </if>
+      <if test="deptRemark != null">
+        #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUuid != null">
+        #{createUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUuid != null">
+        #{updateUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null">
+        #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bhz.cims.iot.entity.CctiBaseDept">
+    update ccti_base_dept
+    <set>
+      <if test="parentUuid != null">
+        PARENT_UUID = #{parentUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null">
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null">
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="enableFlag != null">
+        ENABLE_FLAG = #{enableFlag,jdbcType=INTEGER},
+      </if>
+      <if test="deptLevel != null">
+        DEPT_LEVEL = #{deptLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="serialOrder != null">
+        SERIAL_ORDER = #{serialOrder,jdbcType=INTEGER},
+      </if>
+      <if test="deptRemark != null">
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUuid != null">
+        CREATE_UUID = #{createUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createName != null">
+        CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUuid != null">
+        UPDATE_UUID = #{updateUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateName != null">
+        UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BOS_UUID = #{bosUuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bhz.cims.iot.entity.CctiBaseDept">
+    update ccti_base_dept
+    set PARENT_UUID = #{parentUuid,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      ENABLE_FLAG = #{enableFlag,jdbcType=INTEGER},
+      DEPT_LEVEL = #{deptLevel,jdbcType=VARCHAR},
+      SERIAL_ORDER = #{serialOrder,jdbcType=INTEGER},
+      DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      CREATE_UUID = #{createUuid,jdbcType=VARCHAR},
+      CREATE_NAME = #{createName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_UUID = #{updateUuid,jdbcType=VARCHAR},
+      UPDATE_NAME = #{updateName,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where BOS_UUID = #{bosUuid,jdbcType=VARCHAR}
+  </update>-->
+
+
+</mapper>

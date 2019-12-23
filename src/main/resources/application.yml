@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: spring-boot2.0-demo
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.37.163.112:3306/cims3?useSSL=false&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;noAccessToProcedureBodies=true&amp;zeroDateTimeBehavior=convertToNull
+    username: root
+    password: jmRe4)xV(+#%F3~9
+    name: cims3
+    filters: stat
+    maxActive: 5
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 5
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      auto-commit: true
+      pool-name: HikariCP
+      connection-test-query: SELECT 1
+
+  # HTTP ENCODING
+  http:
+    encoding.charset: UTF-8
+    encoding.enable: true
+    encoding.force: true
+  mvc:
+    view.prefix: /WEB-INF/jsp/
+    view.suffix: .jsp
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+server:
+  port: 8888
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 3000
+    max-connections: 800
+    max-http-post-size: 0
+    min-spare-threads: 100
+servlet:
+  context-path: /demoInterfcae
+  ssl:
+    key-store: classpath:config/server/server.jks
+    key-store-password: ss123456
+    keyStoreType: JKS
+    protocol: https
+mybatis:
+  config-locations: classpath:config/mybatis-config.xml
+  mapperLocations: classpath*:mapper/*.xml
+  typeAliasesPackage: com.bhz.cims.iot.entity
+  mybatis.executorType: BATCH
+
+# 自定义的属性和值
+myYmlConfig:
+  sign:
+    flag: true
+    ip: localhost
+    signKey: qmV$jknP3Hfg$@lH
+  tomcat:
+    port: 9303
+    secure: true
+    scheme: http
+    keyStore.keystore: classpath:config/server/server.jks
+    keyStore.password: ss123456
+  https:
+    contentType: text/json
+    contentEncodingType: application/json
+    charset: UTF-8
+  device:
+    filePath: /home/springboot/cims3/api/conf/linux-x86-64/swsds.ini
+  export:
+    fileRealPath: /workroom/
+    fileUrl: http://101.37.163.112:8555/downloadFile/
+  deviceTag:
+    uat.flag: true
